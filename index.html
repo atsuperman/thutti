@@ -49,6 +49,10 @@
         <div id="group-name">1st நபர் PT/ LT</div>
         <div id="thutti-result">துட்டி கூலி :</div>
         <div id="full-result">Full கூலி :</div>
+        <div id="second-line">இரண்டு நபர் துட்டி :</div>
+        <div id="full-kooli-result">முழு கூலி :</div>
+        <div id="first-kooli-result">1st நபர் கூலி :</div>
+        <div id="second-kooli-result">2nd நபர் கூலி :</div>
     </div>
     <div class="container">
         <label class="group-label">Actual Value:</label>
@@ -72,12 +76,10 @@
     </div>
     <div class="container">
         <label class="group-label">2nd நபர் PT/ LT:</label>
-        <label>i:</label>
+        <label>i நபர் எண்ணிக்கை:</label>
         <input type="number" class="input-field" id="input-i1">
-        <label>j:</label>
-        <input type="number" class="input-field" id="input-j1">
-        <label>k:</label>
-        <input type="number" class="input-field" id="input-k1">
+        <label>j Rate:</label> <input type="number" class="input-field" id="input-j1">
+        <label>k Moottai/ bundle:</label> <input type="number" class="input-field" id="input-k1">
     </div>
     <div class="container">
         <label class="group-label">2nd நபர் LT/ PT:</label>
@@ -95,15 +97,28 @@
             const c = parseFloat(document.getElementById('input-c1').value) || 0;
             const d = parseFloat(document.getElementById('input-d1').value) || 0;
             const e = parseFloat(document.getElementById('input-e1').value) || 0;
+            const i = parseFloat(document.getElementById('input-i1').value) || 0;
+            const j = parseFloat(document.getElementById('input-j1').value) || 0;
+            const k = parseFloat(document.getElementById('input-k1').value) || 0;
             
-            if (b - c !== 0) {
+            if (b - c !== 0 && b - i !== 0) {
                 const thuttiKooli = (a - ((e * d) / (b - c))) + ((e * d) / (b - c) / b);
                 const fullKooli = a + ((e * d) / (b - c) / b);
+                const fullResult = a + ((e * d) / (b - c) / b) + ((k * j) / (b - i) / b);
+                const firstResult = (a - ((e * d) / (b - c))) + ((e * d) / (b - c) / b) + ((k * j) / (b - i) / b);
+                const secondResult = (a + ((e * d) / (b - c) / b)) - ((k * j) / (b - i)) + ((k * j) / (b - i) / b);
+                
                 document.getElementById('thutti-result').innerText = `துட்டி கூலி: ${(thuttiKooli).toFixed(2)}`;
                 document.getElementById('full-result').innerText = `Full கூலி: ${(fullKooli).toFixed(2)}`;
+                document.getElementById('full-kooli-result').innerText = `முழு கூலி: ${(fullResult).toFixed(2)}`;
+                document.getElementById('first-kooli-result').innerText = `1st நபர் கூலி: ${(firstResult).toFixed(2)}`;
+                document.getElementById('second-kooli-result').innerText = `2nd நபர் கூலி: ${(secondResult).toFixed(2)}`;
             } else {
                 document.getElementById('thutti-result').innerText = "துட்டி கூலி: Division by zero error";
                 document.getElementById('full-result').innerText = "Full கூலி: Division by zero error";
+                document.getElementById('full-kooli-result').innerText = "முழு கூலி: Division by zero error";
+                document.getElementById('first-kooli-result').innerText = "1st நபர் கூலி: Division by zero error";
+                document.getElementById('second-kooli-result').innerText = "2nd நபர் கூலி: Division by zero error";
             }
         }
 
@@ -113,4 +128,4 @@
         }
     </script>
 </body>
-</html>
+                              </html>
