@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Input Containers</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .group-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .container label:nth-child(2), .container label:nth-child(3) {
+            margin-bottom: 2px;
+            text-transform: lowercase;
+        }
+
+        .input-field {
+            padding: 5px;
+            border: 1px solid #ccc;
+            width: 50px;
+        }
+
+        .message-container {
+            grid-column: span 2;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <div id="group-name">1st நபர் PT/ LT</div>
+        <div id="thutti-result">துட்டி கூலி :</div>
+        <div id="full-result">Full கூலி :</div>
+    </div>
+    <div class="container">
+        <label class="group-label">Actual Value:</label>
+        <label>a கூலி:</label>
+        <input type="number" class="input-field" id="input-a1">
+        <label>b மொத்த ஆள்:</label> <input type="number" class="input-field" id="input-b1">
+    </div>
+    <div class="container">
+        <label class="group-label">1st நபர் PT/ LT:</label>
+        <label>c நபர் எண்ணிக்கை:</label>
+        <input type="number" class="input-field" id="input-c1">
+        <label>d Rate:</label> <input type="number" class="input-field" id="input-d1">
+        <label>e Moottai/ bundle:</label> <input type="number" class="input-field" id="input-e1">
+    </div>
+    <div class="container">
+        <label class="group-label">1st நபர் LT /PT:</label>
+        <label>f:</label>
+        <input type="number" class="input-field" id="input-f1">
+        <label>g:</label> <input type="number" class="input-field" id="input-g1">
+        <label>h:</label> <input type="number" class="input-field" id="input-h1">
+    </div>
+    <div class="container">
+        <label class="group-label">2nd நபர் PT/ LT:</label>
+        <label>i:</label>
+        <input type="number" class="input-field" id="input-i1">
+        <label>j:</label>
+        <input type="number" class="input-field" id="input-j1">
+        <label>k:</label>
+        <input type="number" class="input-field" id="input-k1">
+    </div>
+    <div class="container">
+        <label class="group-label">2nd நபர் LT/ PT:</label>
+        <label>l:</label>
+        <input type="number" class="input-field" id="input-l1">
+        <label>m:</label>
+        <input type="number" class="input-field" id="input-m1">
+        <label>n:</label>
+        <input type="number" class="input-field" id="input-n1">
+    </div>
+    <script>
+        function calculateResults() {
+            const a = parseFloat(document.getElementById('input-a1').value) || 0;
+            const b = parseFloat(document.getElementById('input-b1').value) || 0;
+            const c = parseFloat(document.getElementById('input-c1').value) || 0;
+            const d = parseFloat(document.getElementById('input-d1').value) || 0;
+            const e = parseFloat(document.getElementById('input-e1').value) || 0;
+            
+            if (b - c !== 0) {
+                const thuttiKooli = (a - ((e * d) / (b - c))) + ((e * d) / (b - c) / b);
+                const fullKooli = a + ((e * d) / (b - c) / b);
+                document.getElementById('thutti-result').innerText = `துட்டி கூலி: ${(thuttiKooli).toFixed(2)}`;
+                document.getElementById('full-result').innerText = `Full கூலி: ${(fullKooli).toFixed(2)}`;
+            } else {
+                document.getElementById('thutti-result').innerText = "துட்டி கூலி: Division by zero error";
+                document.getElementById('full-result').innerText = "Full கூலி: Division by zero error";
+            }
+        }
+
+        window.addEventListener('load', calculateResults);
+        for (const input of document.querySelectorAll('.input-field')) {
+            input.addEventListener('input', calculateResults);
+        }
+    </script>
+</body>
+</html>
